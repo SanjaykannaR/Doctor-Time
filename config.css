@@ -1,0 +1,616 @@
+/* ============================================================
+   DOCTOR TIME — Global Design System Config
+   Teal × Gold × Clean Healthcare UI
+   Fonts: Lora (headings) + DM Sans (body)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================ */
+
+:root {
+
+  /* --- Brand Colors --- */
+  --color-primary:        #0A7B6C;   /* Teal — main brand color */
+  --color-primary-dark:   #075E52;   /* Teal dark — hover states */
+  --color-primary-light:  #0D9E8A;   /* Teal light — active/focus rings */
+  --color-primary-subtle: #E6F4F2;   /* Teal wash — backgrounds, tags */
+
+  --color-accent:         #D4A843;   /* Gold — highlights, badges, CTAs */
+  --color-accent-dark:    #B88C2E;   /* Gold dark — hover on gold elements */
+  --color-accent-light:   #F0CE7A;   /* Gold light — soft badges */
+  --color-accent-subtle:  #FDF7E8;   /* Gold wash — backgrounds */
+
+  /* --- Neutral Palette --- */
+  --color-white:          #FFFFFF;
+  --color-bg:             #F7FAFA;   /* App background — very light teal tint */
+  --color-surface:        #FFFFFF;   /* Cards, panels */
+  --color-surface-alt:    #F0F5F5;   /* Alternate surface — sidebar, input bg */
+  --color-border:         #D6E4E2;   /* Default borders */
+  --color-border-strong:  #B2CECA;   /* Emphasized borders */
+
+  /* --- Text Colors --- */
+  --color-text-primary:   #0F2E2B;   /* Headings — near-black teal tint */
+  --color-text-secondary: #3D5E5A;   /* Body text */
+  --color-text-muted:     #7A9E9A;   /* Captions, placeholders */
+  --color-text-disabled:  #B0C9C7;   /* Disabled state */
+  --color-text-inverse:   #FFFFFF;   /* Text on dark/teal backgrounds */
+
+  /* --- Semantic / Status Colors --- */
+  --color-success:        #1A9E5C;
+  --color-success-subtle: #E6F7EF;
+  --color-warning:        #D4A843;   /* Reuses gold */
+  --color-warning-subtle: #FDF7E8;
+  --color-error:          #D64545;
+  --color-error-subtle:   #FDEAEA;
+  --color-info:           #2D7DD2;
+  --color-info-subtle:    #EAF2FC;
+
+  /* ============================================================
+     2. TYPOGRAPHY
+     ============================================================ */
+
+  --font-heading: 'Lora', Georgia, serif;          /* Doctor, trust, authority */
+  --font-body:    'DM Sans', sans-serif;            /* Clean, readable, modern */
+
+  /* Font Sizes — Major Third Scale (1.25) */
+  --text-xs:    0.64rem;    /* 10.2px — labels, badges */
+  --text-sm:    0.8rem;     /* 12.8px — captions, helper text */
+  --text-base:  1rem;       /* 16px   — body default */
+  --text-md:    1.25rem;    /* 20px   — slightly larger body */
+  --text-lg:    1.563rem;   /* 25px   — subheadings */
+  --text-xl:    1.953rem;   /* 31.25px — section headings */
+  --text-2xl:   2.441rem;   /* 39px   — page titles */
+  --text-3xl:   3.052rem;   /* 48.8px — hero headings */
+
+  /* Font Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line Heights */
+  --leading-tight:   1.2;
+  --leading-snug:    1.375;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.04em;
+  --tracking-widest:  0.12em;
+
+  /* ============================================================
+     3. SPACING SCALE (4px base grid)
+     ============================================================ */
+
+  --space-1:   0.25rem;   /*  4px */
+  --space-2:   0.5rem;    /*  8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+
+  /* ============================================================
+     4. BORDER RADIUS
+     ============================================================ */
+
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-full: 9999px;   /* Pills, avatars */
+
+  /* ============================================================
+     5. SHADOWS
+     ============================================================ */
+
+  --shadow-xs:  0 1px 2px rgba(10, 123, 108, 0.06);
+  --shadow-sm:  0 2px 8px rgba(10, 123, 108, 0.08);
+  --shadow-md:  0 4px 16px rgba(10, 123, 108, 0.12);
+  --shadow-lg:  0 8px 32px rgba(10, 123, 108, 0.14);
+  --shadow-xl:  0 16px 48px rgba(10, 123, 108, 0.16);
+  --shadow-card: 0 2px 12px rgba(10, 123, 108, 0.10);
+
+  /* Gold glow — for accent/CTA hover */
+  --shadow-gold: 0 4px 20px rgba(212, 168, 67, 0.30);
+
+  /* ============================================================
+     6. TRANSITIONS & ANIMATION
+     ============================================================ */
+
+  --transition-fast:    150ms ease;
+  --transition-base:    250ms ease;
+  --transition-slow:    400ms ease;
+  --transition-bounce:  300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+     7. Z-INDEX SCALE
+     ============================================================ */
+
+  --z-base:     0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+  --z-tooltip:  600;
+
+  /* ============================================================
+     8. LAYOUT
+     ============================================================ */
+
+  --max-width-sm:   640px;
+  --max-width-md:   768px;
+  --max-width-lg:   1024px;
+  --max-width-xl:   1280px;
+  --max-width-2xl:  1440px;
+
+  --navbar-height:  64px;
+  --sidebar-width:  260px;
+
+}
+
+/* ============================================================
+   9. GLOBAL RESETS & BASE STYLES
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   10. TYPOGRAPHY DEFAULTS
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl);  }
+h3 { font-size: var(--text-lg);  }
+h4 { font-size: var(--text-md);  }
+h5 { font-size: var(--text-base); font-family: var(--font-body); font-weight: var(--weight-semibold); }
+h6 { font-size: var(--text-sm);  font-family: var(--font-body); font-weight: var(--weight-semibold); }
+
+p {
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover { color: var(--color-primary-dark); }
+
+small, .text-small {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   11. UTILITY CLASSES
+   ============================================================ */
+
+/* --- Layout --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* --- Text color utilities --- */
+.text-primary   { color: var(--color-primary); }
+.text-accent    { color: var(--color-accent); }
+.text-muted     { color: var(--color-text-muted); }
+.text-inverse   { color: var(--color-text-inverse); }
+
+/* --- Background utilities --- */
+.bg-primary        { background-color: var(--color-primary); }
+.bg-primary-subtle { background-color: var(--color-primary-subtle); }
+.bg-accent         { background-color: var(--color-accent); }
+.bg-accent-subtle  { background-color: var(--color-accent-subtle); }
+.bg-surface        { background-color: var(--color-surface); }
+
+/* --- Card base --- */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* --- Doctor Card (patient search results) --- */
+.doctor-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+.doctor-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   12. BUTTON SYSTEM
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-6);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Primary — Teal fill */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-primary);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+/* Secondary — Teal outline */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-secondary:hover {
+  background-color: var(--color-primary-subtle);
+}
+
+/* Accent — Gold fill (CTAs, "Book Now") */
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
+  border-color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+}
+.btn-accent:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Ghost — no background */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text-primary);
+}
+
+/* Danger */
+.btn-danger {
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+  border-color: var(--color-error);
+}
+.btn-danger:hover {
+  background-color: #b83a3a;
+  border-color: #b83a3a;
+}
+
+/* Button Sizes */
+.btn-sm { font-size: var(--text-sm); padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); }
+.btn-lg { font-size: var(--text-md); padding: var(--space-4) var(--space-8); border-radius: var(--radius-lg); }
+.btn-full { width: 100%; }
+
+/* ============================================================
+   13. FORM / INPUT SYSTEM
+   ============================================================ */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(10, 123, 108, 0.15);
+}
+
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(214, 69, 69, 0.12);
+}
+
+.form-helper {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.form-error {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* ============================================================
+   14. BADGE / TAG SYSTEM
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  padding: 3px var(--space-3);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.badge-primary  { background: var(--color-primary-subtle); color: var(--color-primary-dark); }
+.badge-accent   { background: var(--color-accent-subtle); color: var(--color-accent-dark); }
+.badge-success  { background: var(--color-success-subtle); color: var(--color-success); }
+.badge-warning  { background: var(--color-warning-subtle); color: var(--color-accent-dark); }
+.badge-error    { background: var(--color-error-subtle); color: var(--color-error); }
+.badge-info     { background: var(--color-info-subtle); color: var(--color-info); }
+
+/* ============================================================
+   15. AVATAR
+   ============================================================ */
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+  flex-shrink: 0;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-sm  { width: 32px;  height: 32px;  font-size: var(--text-xs); }
+.avatar-md  { width: 48px;  height: 48px;  font-size: var(--text-sm); }
+.avatar-lg  { width: 64px;  height: 64px;  font-size: var(--text-md); }
+.avatar-xl  { width: 96px;  height: 96px;  font-size: var(--text-lg); }
+
+/* ============================================================
+   16. STATUS INDICATORS
+   ============================================================ */
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+.status-dot.available  { background-color: var(--color-success); }
+.status-dot.busy       { background-color: var(--color-error); }
+.status-dot.away       { background-color: var(--color-warning); }
+
+/* ============================================================
+   17. SLOT / TIME CHIP (Booking Page)
+   ============================================================ */
+
+.slot-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+.slot-chip:hover:not(.disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+}
+.slot-chip.selected {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.slot-chip.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* ============================================================
+   18. FEEDBACK / ALERTS
+   ============================================================ */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  border: 1px solid transparent;
+}
+.alert-success { background: var(--color-success-subtle); color: var(--color-success);       border-color: rgba(26,158,92,0.2); }
+.alert-warning { background: var(--color-warning-subtle); color: var(--color-accent-dark);   border-color: rgba(212,168,67,0.2); }
+.alert-error   { background: var(--color-error-subtle);   color: var(--color-error);         border-color: rgba(214,69,69,0.2); }
+.alert-info    { background: var(--color-info-subtle);    color: var(--color-info);           border-color: rgba(45,125,210,0.2); }
+
+/* ============================================================
+   19. DIVIDER
+   ============================================================ */
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-6) 0;
+}
+
+/* ============================================================
+   20. SKELETON LOADER
+   ============================================================ */
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   21. SCROLLBAR (WebKit)
+   ============================================================ */
+
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+/* ============================================================
+   22. FOCUS RING (Accessibility)
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* ============================================================
+   23. SELECTION COLOR
+   ============================================================ */
+
+::selection {
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary-dark);
+}
+
+/* ============================================================
+   24. RESPONSIVE BREAKPOINTS (Reference for JS/Tailwind use)
+   sm: 640px  | md: 768px  | lg: 1024px
+   xl: 1280px | 2xl: 1440px
+   ============================================================ */
