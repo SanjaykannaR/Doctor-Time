@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/search/common/Navbar'; // <-- 1. Import the Navbar component
 // HINT: Import icons here! 
 
 import { FiCalendar, FiClock, FiMapPin, FiCheckCircle } from "react-icons/fi";
@@ -28,8 +29,14 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen p-4 md:p-8" style={{ backgroundColor: '--color-primary', padding: 'var(--space-6)' }}>
-      <div className="max-w-6xl mx-auto">
+   <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg)' }}>
+      
+      {/* 2. EDGE-TO-EDGE NAVBAR */}
+      <Navbar />  
+
+      {/* 2. MAIN CONTENT */}
+      
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pb-12 mt-4 md:mt-8" style={{marginLeft: 'var(--space-4)', marginRight: 'var(--space-4  )'}}>
         
         {/* ============================== */}
         {/* WELCOME HEADER                 */}
@@ -40,27 +47,27 @@ const HomePage = () => {
         {/* Using your brand Teal color for a massive, premium background */}
         <div 
           className="rounded-3xl p-6 md:p-10 mb-10 relative overflow-hidden shadow-lg" 
-          style={{ backgroundColor: 'var(--color-primary)', padding: 'var(--space-6)' }}
+          style={{ backgroundColor: 'var(--color-primary)', padding: 'var(--space-6)', marginTop: 'var(--space-6)' }}
         >
           {/* Decorative background circle to add depth */}
-          <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 rounded-full opacity-10 bg-white"></div>
+          <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 rounded-full opacity-10 bg-white" ></div>
 
           <div className="relative z-10">
             
             {/* 1. WELCOME TEXT & CTA */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--color-text-inverse)' }}>
+                <h1 className="text- md:text-3xl font-bold" style={{ color: 'var(--color-text-inverse)' }}>
                   Welcome back, Sanjay!
                 </h1>
-                <p className="mt-2 text-lg" style={{ color: 'var(--color-primary-subtle)' }}>
+                <p className="mt-2 text-sm md:text-lg " style={{ color: 'var(--color-primary-subtle)', marginTop: 'var(--space-2)' }}>
                   Here is your health overview for today.
                 </p>
               </div>
               
               {/* Upgraded to your Gold Accent button for maximum contrast! */}
               <button 
-                className="btn btn-accent" 
+                className="btn btn-accent" style={{marginBottom: 'var(--space-3)'}} 
                 onClick={() => navigate('/search')}
               >
                 Find a Doctor
@@ -73,27 +80,25 @@ const HomePage = () => {
               
               {/* Doctor Info & Badge */}
               <div>
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex-nowrap items-center gap-3 mb-2">
                   <h4 className="font-bold text-xl">{upcomingAppointment.doctorName}</h4>
                   {/* Using your custom badge-success class! */}
-                  <span className="badge badge-success">
+                  <span className="badge badge-success" style={{marginTop: 'var(--space-3)'}}>
                     <FiCheckCircle /> Confirmed
                   </span>
                 </div>
-                <p className="text-primary font-medium text-md">{upcomingAppointment.specialty}</p>
+                <p className="text-primary font-medium text-sm md:text-md" style={{marginTop: 'var(--space-1)'}}>{upcomingAppointment.specialty}</p>
               </div>
 
-              {/* Time & Location with Icons! */}
+              {/* Time & Location */}
               <div className="flex flex-col gap-2 text-muted text-sm md:text-base">
-                 <p className="flex items-center gap-2 font-semibold" style={{ color: 'var(--color-text-primary)' }}>
+                 {/* FIX 2: Added flex-wrap so the time drops to a new line if it runs out of space! */}
+                 <p className="flex flex-wrap items-center gap-2 font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                     <FiCalendar className="text-primary" /> {upcomingAppointment.date}
-                    <span className="mx-2">|</span>
+                    <span className="mx-2 hidden sm:inline">|</span> {/* Hides the divider on tiny screens */}
                     <FiClock className="text-primary" /> {upcomingAppointment.time}
                  </p>
-                 <p className="flex items-center gap-2">
-                    <FiMapPin /> {upcomingAppointment.location}
-                 </p>
-              </div>
+                 </div>
 
               {/* ACTION BUTTON */}
               <div className="mt-2 md:mt-0 w-full md:w-auto">
@@ -125,7 +130,7 @@ const HomePage = () => {
             <div className="flex flex-col gap-3" style={{marginTop: "var(--space-6)"}}>
               {/* Mapping over the recentRecords data! */}
               {recentRecords.map((record) => (
-                <div key={record.id} className="card p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-shadow">
+                <div key={record.id} className="card p-4 flex flex-col sm:flex-row justify-between items-end sm:items-center gap-4 hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3">
                     {/* A small teal icon box */}
                     <div className="p-2 rounded" style={{ backgroundColor: 'var(--color-primary-subtle)', color: 'var(--color-primary)' }}>
@@ -168,7 +173,7 @@ const HomePage = () => {
                     </div>
                   </div>
 
-                  <div className="text-right flex flex-col items-end gap-1">
+                  <div className="text-right flex flex-col items-start gap-1 md:items-end">
                     <p className="text-xs font-bold" style={{ color: 'var(--color-accent-dark)' }}>⭐ {doctor.rating}</p>
                     {/* Using a smaller version of your secondary button */}
                     <button className="btn btn-secondary text-xs px-3 py-1">Book</button>
