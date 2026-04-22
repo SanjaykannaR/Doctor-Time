@@ -614,3 +614,19 @@ small, .text-small {
    sm: 640px  | md: 768px  | lg: 1024px
    xl: 1280px | 2xl: 1440px
    ============================================================ */
+
+.dark {
+  --color-bg:  #1A1A1A;
+  --color-surface: #000000;
+  --color-text-primary: #ffffff;
+  /* etc... */
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-modern-fade {
+  animation: fadeInScale 0.2s ease-out forwards;
+}
