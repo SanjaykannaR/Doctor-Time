@@ -74,7 +74,7 @@ const HomePage = () => {
       <Navbar />
 
       {/* MAIN LAYOUT WRAPPER */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-12 mt-4 md:mt-8">
+      <div className="max-w-[2560px] mx-auto px-4 md:px-8 pb-12 mt-4 md:mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* ========================================================= */}
           {/* LEFT SIDE: YOUR ORIGINAL CONTENT (Spans 9 columns)        */}
@@ -279,7 +279,7 @@ const HomePage = () => {
           {/* ========================================================= */}
           {/* RIGHT SIDE: THE NEW AD BANNER (Spans 3 columns)             */}
           {/* ========================================================= */}
-          <aside className="hidden lg:block lg:col-span-3">
+          <aside className="hidden lg:block lg:col-span-3" style={{marginTop: 'var(--space-4)', marginRight: 'var(--space-3)'}}>
             <div className="sticky top-24">
               <a
                 href={currentAd.link}

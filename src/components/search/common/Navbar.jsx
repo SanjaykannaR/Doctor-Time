@@ -76,7 +76,7 @@ const Navbar = () => {
         padding: "var(--space-2)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 w-full flex justify-between items-center">
+      <div className="max-w-[2560px] mx-auto px-4 md:px-8 py-4 w-full flex justify-between items-center">
         {/* LOGO */}
         <div className="flex items-center gap-2 cursor-pointer">
           <div
