@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/search/common/Navbar";
 import { FiCalendar, FiClock, FiCheckCircle } from "react-icons/fi";
 import { fetchHomeData } from "../services/homeService";
 
@@ -70,9 +69,6 @@ const HomePage = () => {
       className="min-h-screen"
       style={{ backgroundColor: "var(--color-bg)" }}
     >
-      {/* EDGE-TO-EDGE NAVBAR */}
-      <Navbar />
-
       {/* MAIN LAYOUT WRAPPER */}
       <div className="max-w-[2560px] mx-auto px-4 md:px-8 pb-12 mt-4 md:mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

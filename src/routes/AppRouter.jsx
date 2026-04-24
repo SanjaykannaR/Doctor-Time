@@ -1,21 +1,26 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-// Import our pages
+// 1. Import your pages
+import HomePage from '../pages/HomePage';
+import SearchPage from '../pages/SearchPage';
 import LoginPage from '../pages/LoginPage';
-import HomePage from '../pages/HomePage'; // <-- 1. Import the new page!
+// Import other pages as you build them (HealthVault, etc.)
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        
-        {/* 2. Add the route for /home */}
-        <Route path="/home" element={<HomePage />} /> 
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      {/* Redirect the empty path to /home */}
+      <Route path="/" element={<Navigate to="/home" />} />
+      
+      {/* 2. Define the Home and Search routes */}
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* 3. Catch-all: redirect any unknown URL back to home */}
+      <Route path="*" element={<Navigate to="/home" />} />
+    </Routes>
   );
 };
 
