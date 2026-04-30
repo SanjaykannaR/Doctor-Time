@@ -107,9 +107,9 @@ const Navbar = () => {
               type="text"
               value={currentQuery}
               onChange={handleSearchChange}
-              placeholder="     Search doctors, specialty..."
+              placeholder="Search doctors, specialty..."
               autoComplete="off"
-              className="block w-full pl-12 pr-12 py-2.5 bg-gray-50 border border-gray-100 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white"
+              className="block w-full py-2.5 bg-gray-50 border border-gray-100 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white"
               style={{
                 marginLeft: "var(--space-2)",
                 paddingLeft: "3rem", // This fixes the icon overlap
@@ -194,17 +194,21 @@ const Navbar = () => {
 
       {/* MOBILE MENU */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full border-b shadow-xl md:hidden flex flex-col p-4 z-50 bg-white animate-in slide-in-from-top-2">
+        <div className="absolute top-full left-0 w-full border-b shadow-xl md:hidden flex flex-col p-6 gap-2 z-50 bg-white animate-in slide-in-from-top-2"
+          style={{ borderColor: "var(--color-border)" , padding: "var(--space-4)" }}>
           <button
             onClick={toggleNotifMenu}
-            className="flex items-center justify-between p-3 hover:bg-emerald-50 rounded-xl transition-colors"
+            className="flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl transition-colors"
           >
-            <div className="flex items-center gap-3">
-              <FiBell /> Notifications
+            <div className="flex items-center gap-4">
+              <div className="relative flex items-center" >
+              <FiBell size={20} className="text-gray-600" />
+              {hasUnread && (
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500 border-2 border-white"></span>
+          )}
             </div>
-            {hasUnread && (
-              <span className="w-2 h-2 rounded-full bg-red-500"></span>
-            )}
+            <span className="font-bold text-gray-700">Notifications</span>
+            </div>
           </button>
           {isNotifOpen && (
             <div className="py-2">
@@ -218,12 +222,13 @@ const Navbar = () => {
 
           <button
             onClick={toggleSettingsMenu}
-            className="flex items-center gap-3 p-3 hover:bg-emerald-50 rounded-xl transition-colors"
+            className="flex items-center gap-4 p-4 hover:bg-emerald-50 rounded-2xl transition-colors"
           >
-            <FiSettings /> Settings
+            <FiSettings size={20} className="text-gray-600" />
+      <span className="font-bold text-gray-700">Settings</span>
           </button>
           {isSettingsOpen && (
-            <div className="py-2">
+            <div className="py-2 px-2">
               <SettingsDropdown isMobile />
             </div>
           )}

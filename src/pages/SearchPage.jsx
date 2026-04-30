@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FiFilter, FiStar, FiClock, FiMapPin, FiCheck, FiChevronDown } from "react-icons/fi";
+import {
+  FiFilter,
+  FiStar,
+  FiClock,
+  FiMapPin,
+  FiCheck,
+  FiChevronDown,
+  FiSearch,
+} from "react-icons/fi";
 import { searchDoctors } from "../services/doctorService";
 
 const SearchPage = () => {
@@ -10,6 +18,7 @@ const SearchPage = () => {
   const [allDoctors, setAllDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSpecs, setSelectedSpecs] = useState([]);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // --- MISSING LOGIC 1: Toggle Specialty ---
   const toggleSpec = (spec) => {
@@ -49,24 +58,61 @@ const SearchPage = () => {
         className="max-w-[2560px] mx-auto px-4 md:px-8 py-8"
         style={{ padding: "var(--space-4)" }}
       >
-        <div
+        {/* MOBILE ONLY SEARCH BAR - Visible only on small screens */}
+        <div className="md:hidden mb-6" style={{ marginTop: "var(--space-2)" }}>
+          <div className="relative">
+            {/* <FiSearch
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    size={18}
+                  /> */}
+            <input
+              type="text"
+              autoFocus
+              value={query}
+              onChange={(e) => setSearchParams({ q: e.target.value })}
+              placeholder="Search doctors, specialty..."
+              
+              className="w-full  !pl-4 pr-12 py-3 bg-white border border-gray-100 rounded-2xl shadow-sm outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-500"
+            />
+          </div>
+        </div>
+        {/* <div
           className="mb-12"
           style={{ marginTop: "var(--space-6)", paddingLeft: "var(--space-2)" }}
         >
-          <h3 className="text-3xl font-black text-gray-900">
+           <h3 className="text-3xl font-black text-gray-900">
             {query ? `Results for "${query}"` : "Find Your Specialist"}
-          </h3>
-          <p className="text-gray-500 font-medium mt-2" style={{marginBottom: 'var(--space-3)'}}>
+          </h3> 
+           <p
+            className="text-gray-500 font-medium mt-2"
+            style={{ marginBottom: "var(--space-3)" }}
+          >
             Showing {filteredDoctors.length} doctors based on your search and
             filters.
-          </p>
-        </div>
+          </p> 
+        </div> */}
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* SIDEBAR FILTERS */}
-          <aside className="w-full lg:w-72 shrink-0">
+          <aside
+            className={`${
+              isFilterOpen
+                ? "fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+                : "hidden"
+            } 
+    lg:relative lg:inset-auto lg:block lg:bg-transparent lg:p-0 lg:z-0 lg:w-72 shrink-0
+  `}
+          >
+            {isFilterOpen && (
+              <button
+                onClick={() => setIsFilterOpen(false)}
+                className="lg:hidden absolute top-10 right-10 text-white font-black text-2xl"
+              >
+                ✕
+              </button>
+            )}
             <div
-              className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm sticky top-24 overflow-hidden"
+              className="bg-white rounded-[2.5rem] border border-gray-100 shadow-2xl lg:shadow-sm w-full max-w-[320px] lg:max-w-none overflow-hidden"
               style={{ padding: "var(--space-6)", height: "fit-content" }}
             >
               <div className="flex items-center gap-2 mb-8 text-gray-900">
@@ -156,7 +202,7 @@ const SearchPage = () => {
 
           {/* MAIN RESULTS AREA */}
           <main className="flex-1">
-            <div className="mb-8 flex justify-between items-center">
+            <div className="mb-8 flex justify-between items-center px-2">
               <div>
                 <h2 className="text-xl font-black text-gray-900">
                   Search Results
@@ -166,17 +212,34 @@ const SearchPage = () => {
                 </p>
               </div>
 
-              <select
-                className="appearance-none bg-white border border-gray-100 rounded-lg px-4 py-2 text-xs font-bold text-emerald-600 focus:outline-none shadow-sm"
-                style={{ padding: "var(--space-3)" }}
-              >
-                <option>Recommended</option>
-                <option>Highest Rating</option>
-                <option>Most Experienced</option>
-              </select>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsFilterOpen(true)} // Opens the hidden menu
+                  className="lg:hidden p-3 bg-white border border-gray-100 rounded-2xl shadow-sm text-emerald-600"
+                  style={{
+                    padding: "var(--space-2)",
+                  }}
+                >
+                  <FiFilter size={20} />
+                </button>
 
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-emerald-600" >
-                <FiChevronDown size={14} />
+                <div className="relative inline-block">
+                  <select
+                    className="appearance-none bg-white border border-gray-100 rounded-lg px-4 py-2 text-xs font-bold text-emerald-600 focus:outline-none shadow-sm"
+                    style={{ padding: "var(--space-3)" }}
+                  >
+                    <option>Recommended</option>
+                    <option>Highest Rating</option>
+                    <option>Most Experienced</option>
+                  </select>
+
+                  <div
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-emerald-600"
+                    style={{ marginRight: "var(--space-3)" }}
+                  >
+                    <FiChevronDown size={14} />
+                  </div>
+                </div>
               </div>
             </div>
 
