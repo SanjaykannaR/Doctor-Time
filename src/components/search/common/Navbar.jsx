@@ -17,6 +17,7 @@ import {
   FiLogOut,
   FiSearch,
 } from "react-icons/fi";
+import Avatar from "./Avatar";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -177,14 +178,12 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div
-            className="avatar avatar-sm cursor-pointer border-2 w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm"
-            style={{
-              borderColor: "var(--color-primary-subtle)",
-            }}
-          >
-            S
-          </div>
+          <Avatar
+            name="Sanjay Kanna"
+            size="sm"
+            className="cursor-pointer border-2"
+            style={{ borderColor: "var(--color-primary-subtle)" }}
+          />
 
           <button className="md:hidden p-1" onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}

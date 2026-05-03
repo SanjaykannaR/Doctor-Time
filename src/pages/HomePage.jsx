@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiCalendar, FiClock, FiCheckCircle } from "react-icons/fi";
 import { fetchHomeData } from "../services/homeService";
+import Avatar from "../components/search/common/Avatar";
+import Badge from "../components/search/common/Badge";
+import Spinner from "../components/search/common/Spinner";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -34,15 +37,9 @@ const HomePage = () => {
   if (isLoading) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: "var(--color-bg)" }}
+        className="page-shell flex items-center justify-center"
       >
-        <p
-          className="font-bold animate-pulse"
-          style={{ color: "var(--color-primary)" }}
-        >
-          Loading Doctor Time...
-        </p>
+        <Spinner label="Loading Doctor Time..." />
       </div>
     );
   }
@@ -65,12 +62,9 @@ const HomePage = () => {
   };
 
   return (
-    <div
-      className="min-h-screen"
-      style={{ backgroundColor: "var(--color-bg)" }}
-    >
+    <div className="page-shell">
       {/* MAIN LAYOUT WRAPPER */}
-      <div className="max-w-[2560px] mx-auto px-4 md:px-8 pb-12 mt-4 md:mt-8">
+      <div className="page-container-wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* ========================================================= */}
           {/* LEFT SIDE: YOUR ORIGINAL CONTENT (Spans 9 columns)        */}
@@ -83,7 +77,7 @@ const HomePage = () => {
           >
             {/* PREMIUM HERO BANNER */}
             <div
-              className="rounded-3xl p-6 md:p-10 mb-10 relative overflow-hidden shadow-lg"
+              className="content-card bg-primary mb-10 relative overflow-hidden"
               style={{
                 backgroundColor: "var(--color-primary)",
                 padding: "var(--space-6)",
@@ -122,18 +116,15 @@ const HomePage = () => {
                   </button>
                 </div>
 
-                <div className="card mt-2 border-0 shadow-xl flex flex-col md:flex-row justify-between md:items-center gap-6">
+                <div className="card mt-2 flex flex-col md:flex-row justify-between md:items-center gap-6">
                   <div>
                     <div className="flex-nowrap items-center gap-3 mb-2">
                       <h4 className="font-bold text-xl">
                         {upcomingAppointment.doctorName}
                       </h4>
-                      <span
-                        className="badge badge-success"
-                        style={{ marginTop: "var(--space-3)" }}
-                      >
+                      <Badge variant="success" className="mt-3">
                         <FiCheckCircle /> Confirmed
-                      </span>
+                      </Badge>
                     </div>
                     <p
                       className="text-primary font-medium text-sm md:text-md"
@@ -157,7 +148,8 @@ const HomePage = () => {
                   </div>
 
                   <div className="mt-2 md:mt-0 w-full md:w-auto">
-                    <button className="btn btn-secondary w-full">
+                    <button className="btn btn-secondary w-full"
+                    onClick={() => navigate("/appointments")}>
                       Reschedule
                     </button>
                   </div>
@@ -177,6 +169,7 @@ const HomePage = () => {
                   <button
                     className="text-sm font-bold"
                     style={{ color: "var(--color-primary)" }}
+                    onClick={() => navigate("/vault")}
                   >
                     View Vault &rarr;
                   </button>
@@ -189,7 +182,7 @@ const HomePage = () => {
                   {recentRecords.map((record) => (
                     <div
                       key={record.id}
-                      className="card p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-shadow bg-white"
+                      className="card flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                     >
                       <div className="flex items-center gap-3">
                         <div
@@ -211,6 +204,7 @@ const HomePage = () => {
                       <button
                         className="text-sm font-medium self-end"
                         style={{ color: "var(--color-primary)" }}
+                        onClick={() => navigate(`/vault/record/${record.id}`)}
                       >
                         View
                       </button>
@@ -226,6 +220,7 @@ const HomePage = () => {
                   <button
                     className="text-sm font-bold"
                     style={{ color: "var(--color-primary)" }}
+                    onClick={() => navigate("/search")}
                   >
                     See All &rarr;
                   </button>
@@ -238,12 +233,10 @@ const HomePage = () => {
                   {suggestedDoctors.map((doctor) => (
                     <div
                       key={doctor.id}
-                      className="card p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:shadow-md transition-shadow bg-white"
+                      className="card flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="avatar avatar-md bg-gray-200 flex items-center justify-center rounded-full w-10 h-10">
-                          {doctor.name.charAt(4)}
-                        </div>
+                        <Avatar name={doctor.name} />
                         <div>
                           <h4 className="font-semibold">{doctor.name}</h4>
                           <p
@@ -261,7 +254,10 @@ const HomePage = () => {
                         >
                           ⭐ {doctor.rating}
                         </p>
-                        <button className="btn btn-secondary text-xs px-3 py-1">
+                        <button
+                          className="btn btn-secondary text-xs px-3 py-1"
+                          onClick={() => navigate(`/booking/${doctor.id}`)}
+                        >
                           Book
                         </button>
                       </div>

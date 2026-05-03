@@ -10,8 +10,8 @@ const mockHomeData = {
     time: "10:00 AM",
   },
   recentRecords: [
-    { id: 1, title: "ECG + Echo Report", date: "Feb 14, 2025" },
-    { id: 2, title: "Prescription - Atorvastatin", date: "Jan 08, 2025" },
+    { id: "REC-002", title: "ECG + Echo Report", date: "Feb 14, 2025" },
+    { id: "REC-003", title: "Prescription - Atorvastatin", date: "Jan 08, 2025" },
   ],
   suggestedDoctors: [
     { id: 1, name: "Dr. Priya Sundaram", specialty: "Cardiologist", rating: 4.8 },

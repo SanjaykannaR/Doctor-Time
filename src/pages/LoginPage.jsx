@@ -40,7 +40,7 @@ const LoginPage = () => {
   return (
     // 1. The main wrapper is now a flex container taking up the full screen.
     // md:flex-row means it will stack on mobile, but split 50/50 on desktop!
-    <div className="min-h-screen flex flex-col lg:flex-row">
+    <div className="page-shell flex flex-col lg:flex-row" style={{ padding: 0 }}>
       {/* LEFT COLUMN: BRAND & MARKETING */}
       <div
         className="hidden lg:flex flex-1 items-center justify-center p-12 xl:p-20"
@@ -108,7 +108,6 @@ const LoginPage = () => {
       {/* flex-1 makes this take up the other half of the screen */}
       <div
         className="flex-1 flex items-center justify-center p-6 sm:p-10 lg:p-16"
-        style={{ backgroundColor: "var(--color-bg)" }}
       >
         <div className="card w-full max-w-md">
           {/* Header section of the card */}

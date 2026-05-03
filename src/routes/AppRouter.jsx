@@ -1,25 +1,30 @@
 import React from 'react';
+// 1. Remove BrowserRouter from the import
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-// 1. Import your pages
+// Import your pages...
 import HomePage from '../pages/HomePage';
-import SearchPage from '../pages/SearchPage';
 import LoginPage from '../pages/LoginPage';
-// Import other pages as you build them (HealthVault, etc.)
+import SearchPage from '../pages/SearchPage';
+import DoctorProfilePage from '../pages/DoctorProfilePage';
+import BookingPage from '../pages/BookingPage';
+import AppointmentsDashboard from '../pages/AppointmentsDashboard';
+import HealthVaultPage from '../pages/HealthVaultPage';
+import RecordDetailPage from '../pages/RecordDetailPage';
 
 const AppRouter = () => {
   return (
+    // 2. Remove the <BrowserRouter> wrapping tags here! Just use <Routes>
     <Routes>
-      {/* Redirect the empty path to /home */}
-      <Route path="/" element={<Navigate to="/home" />} />
-      
-      {/* 2. Define the Home and Search routes */}
-      <Route path="/home" element={<HomePage />} />
-      <Route path="/search" element={<SearchPage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
-
-      {/* 3. Catch-all: redirect any unknown URL back to home */}
-      <Route path="*" element={<Navigate to="/home" />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/doctor/:id" element={<DoctorProfilePage />} />
+      <Route path="/booking/:id" element={<BookingPage />} />
+      <Route path="/appointments" element={<AppointmentsDashboard />} />
+      <Route path="/vault" element={<HealthVaultPage />} />
+      <Route path="/vault/record/:recordId" element={<RecordDetailPage />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
