@@ -298,7 +298,9 @@ const NotificationDropdown = ({ notifications, markAllAsRead, isMobile }) => (
   </div>
 );
 
-const SettingsDropdown = ({ isMobile }) => (
+const SettingsDropdown = ({ isMobile }) => {
+  const navigate = useNavigate();
+  return (
   <div
     className={`${isMobile ? "w-full" : "absolute top-12 right-0 w-64"} bg-white rounded-3xl shadow-2xl border border-gray-100 z-50 overflow-hidden animate-in fade-in zoom-in-95`}
   >
@@ -333,12 +335,14 @@ const SettingsDropdown = ({ isMobile }) => (
         <button
           className="w-full btn btn-sm btn-danger flex items-center text-sm font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-all"
           style={{ padding: "var(--space-3)" }}
+          onClick={() => navigate("/login")}
         >
           <FiLogOut size={18} style={{ marginRight: "8px" }} /> Logout
         </button>
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default Navbar;
