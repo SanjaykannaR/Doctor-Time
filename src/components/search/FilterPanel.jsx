@@ -16,6 +16,8 @@ const FilterPanel = ({
   resetFilters,
   selectedSpecs,
   toggleSpec,
+  selectedAvailability,
+  toggleAvailability,
 }) => {
   return (
     <aside
@@ -35,7 +37,7 @@ const FilterPanel = ({
       )}
 
       <div
-        className="content-card w-full max-w-[320px] xl:max-w-none overflow-hidden"
+        className="content-card w-full max-w-sm md:max-w-md xl:max-w-none overflow-hidden"
         style={{ padding: "var(--space-6)", height: "fit-content" }}
       >
         <div className="flex items-center gap-2 mb-8">
@@ -63,8 +65,15 @@ const FilterPanel = ({
                       type="checkbox"
                       checked={selectedSpecs.includes(spec)}
                       onChange={() => toggleSpec(spec)}
-                      className="w-5 h-5 rounded-md transition-all cursor-pointer appearance-none border-2 checked:bg-primary"
-                      style={{ borderColor: "var(--color-border)" }}
+                      className="w-5 h-5 rounded-md transition-all cursor-pointer appearance-none border-2 checked:bg-primary checked:border-primary"
+                      style={{
+                        borderColor: selectedSpecs.includes(spec)
+                          ? "var(--color-primary)"
+                          : "var(--color-border)",
+                        backgroundColor: selectedSpecs.includes(spec)
+                          ? "var(--color-primary)"
+                          : "var(--color-surface-alt)",
+                      }}
                     />
                     {selectedSpecs.includes(spec) && (
                       <FiCheck className="absolute text-inverse left-1" size={12} />
@@ -95,11 +104,37 @@ const FilterPanel = ({
               {availabilityOptions.map((time) => (
                 <label
                   key={time}
-                  className="flex items-center gap-3 cursor-pointer"
+                  className="flex items-center gap-3 group cursor-pointer"
                   style={{ marginTop: "var(--space-2)" }}
                 >
-                  <input type="checkbox" className="w-5 h-5 rounded-md cursor-pointer" />
-                  <span className="text-sm font-medium text-muted">{time}</span>
+                  <div className="relative flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedAvailability?.includes(time) || false}
+                      onChange={() => toggleAvailability?.(time)}
+                      className="w-5 h-5 rounded-md transition-all cursor-pointer appearance-none border-2 checked:bg-primary checked:border-primary"
+                      style={{
+                        borderColor: selectedAvailability?.includes(time)
+                          ? "var(--color-primary)"
+                          : "var(--color-border)",
+                        backgroundColor: selectedAvailability?.includes(time)
+                          ? "var(--color-primary)"
+                          : "var(--color-surface-alt)",
+                      }}
+                    />
+                    {selectedAvailability?.includes(time) && (
+                      <FiCheck className="absolute text-inverse left-1" size={12} />
+                    )}
+                  </div>
+                  <span
+                    className={`text-sm font-medium transition-colors ${
+                      selectedAvailability?.includes(time)
+                        ? "text-primary font-bold"
+                        : "text-muted"
+                    }`}
+                  >
+                    {time}
+                  </span>
                 </label>
               ))}
             </div>

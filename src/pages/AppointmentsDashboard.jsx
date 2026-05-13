@@ -58,7 +58,7 @@ const AppointmentsDashboard = () => {
     <div className="page-shell">
       <main className="page-container">
         <h1 className="page-title" style={{ marginBottom: "var(--space-8)" }}>
-          # My Appointments[cite: 1]
+          My Appointments
         </h1>
 
         {/* TABS: Responsive horizontal scroll on mobile[cite: 1] */}

@@ -72,7 +72,7 @@ const HomePage = () => {
           <div
             className="lg:col-span-9"
             style={{
-              padding: "var(--space-6)",
+              // padding: "var(--space-6)",
             }}
           >
             {/* PREMIUM HERO BANNER */}

@@ -29,7 +29,7 @@ const RecordDetailPage = () => {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="page-header" style={{ marginBottom: 0 }}>
-            <h1 className="page-title">#{recordId} Cardiology Follow-up</h1>
+            <h1 className="page-title">{recordId} Cardiology Follow-up</h1>
             <p className="page-subtitle">
               Dr. Arjun Mehta - JIPMER, Puducherry - Jan 08, 2025
             </p>

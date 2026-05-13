@@ -101,9 +101,10 @@ const Navbar = () => {
 
         {/* 2. SINGLE MODERN SEARCH BAR */}
         <div className="hidden md:flex flex-1 justify-center max-w-md relative group">
-          {/* ICON: Now sitting outside the input */}
-          <FiSearch className="text-gray-400 shrink-0" style={{marginTop: 'var(--space-2)'}} size={20} />
           <div className="relative w-full">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiSearch className="text-gray-400" size={20} />
+            </div>
             <input
               type="text"
               value={currentQuery}
@@ -112,8 +113,7 @@ const Navbar = () => {
               autoComplete="off"
               className="block w-full py-2.5 bg-gray-50 border border-gray-100 rounded-full text-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/10 focus:border-emerald-500 focus:bg-white"
               style={{
-                marginLeft: "var(--space-2)",
-                paddingLeft: "3rem", // This fixes the icon overlap
+                paddingLeft: "2.5rem",
                 paddingTop: "var(--space-2)",
                 paddingBottom: "var(--space-2)",
               }}

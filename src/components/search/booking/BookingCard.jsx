@@ -47,7 +47,7 @@ const BookingCard = ({ appointment, onReschedule, onCancel }) => {
         </div>
 
         <p className="text-small text-muted mb-3">
-          <FiClock size={14} className="inline mr-1" />
+          <FiClock size={14} className="inline-flex mr-2 " />
           {appointment.time} • {appointment.duration || "30 mins"}
         </p>
 
@@ -66,13 +66,13 @@ const BookingCard = ({ appointment, onReschedule, onCancel }) => {
       </div>
 
       {/* STATUS & ACTIONS */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+      <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto ">
         <Badge variant={statusColor} className="shrink-0">
           {appointment.status}
         </Badge>
 
         {appointment.status === "Upcoming" && (
-          <div className="flex gap-2 w-full sm:w-auto">
+          <div className="flex gap-2 w-full sm:w-auto ">
             <button
               onClick={() => onReschedule?.(appointment.id)}
               className="btn btn-secondary btn-sm flex-1 sm:flex-none"

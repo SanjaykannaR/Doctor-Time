@@ -9,6 +9,7 @@ export const useSearch = () => {
   const [allDoctors, setAllDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSpecs, setSelectedSpecs] = useState([]);
+  const [selectedAvailability, setSelectedAvailability] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -47,9 +48,16 @@ export const useSearch = () => {
     );
   };
 
+  const toggleAvailability = (time) => {
+    setSelectedAvailability((prev) =>
+      prev.includes(time) ? prev.filter((item) => item !== time) : [...prev, time],
+    );
+  };
+
   const resetFilters = () => {
     setSearchParams({});
     setSelectedSpecs([]);
+    setSelectedAvailability([]);
   };
 
   const filteredDoctors = useMemo(() => {
@@ -72,7 +80,9 @@ export const useSearch = () => {
     query,
     resetFilters,
     selectedSpecs,
+    selectedAvailability,
     setQuery,
     toggleSpec,
+    toggleAvailability,
   };
 };

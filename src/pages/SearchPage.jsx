@@ -11,8 +11,10 @@ const SearchPage = () => {
     query,
     resetFilters,
     selectedSpecs,
+    selectedAvailability,
     setQuery,
     toggleSpec,
+    toggleAvailability,
   } = useSearch();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -33,6 +35,8 @@ const SearchPage = () => {
             resetFilters={resetFilters}
             selectedSpecs={selectedSpecs}
             toggleSpec={toggleSpec}
+            selectedAvailability={selectedAvailability}
+            toggleAvailability={toggleAvailability}
           />
 
           <ResultsList

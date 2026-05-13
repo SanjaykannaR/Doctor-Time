@@ -7,7 +7,7 @@ import Spinner from "./common/Spinner";
 const ResultsList = ({ doctors, loading, onOpenFilters }) => {
   return (
     <main className="flex-1">
-      <div className="mb-8 flex justify-between items-center px-2">
+      <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 px-0 sm:px-2">
         <div>
           <h2>Search Results</h2>
           <p className="section-title">{doctors.length} Specialists found</p>
@@ -16,7 +16,7 @@ const ResultsList = ({ doctors, loading, onOpenFilters }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenFilters}
-            className="btn btn-secondary btn-sm xl:hidden"
+            className="btn btn-secondary btn-sm lg:!hidden"
             style={{ padding: "var(--space-2)" }}
           >
             <FiFilter size={20} />
