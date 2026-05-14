@@ -27,14 +27,6 @@ export default function Doctors() {
 
   return (
       <div style={{ width: "100%", fontFamily: "var(--font-body)" }}>
-        {/* Header Section */}
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-6)" }}>
-          <div>
-            <h1 style={{ color: "var(--color-text-primary)", margin: 0 }}>Doctors</h1>
-            <p className="text-small" style={{ margin: "var(--space-1) 0 0 0" }}>Admin / Doctors List</p>
-          </div>
-        </header>
-
         {/* Filter & Action Row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "var(--space-4)", marginBottom: "var(--space-5)" }}>
           <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center", flexWrap: "wrap" }}>

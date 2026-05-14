@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { 
-  LuSearch, LuBell, LuSave, LuRefreshCw, 
-  LuUser, LuStethoscope, LuCalendar, LuShieldCheck, LuCreditCard 
+  LuSave,
 } from "react-icons/lu";
 
 export default function Settings() {
@@ -23,22 +22,6 @@ export default function Settings() {
 
   return (
       <div style={{ width: "100%", fontFamily: "var(--font-body)" }}>
-        
-        {/* Header */}
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-          <div>
-            <h1 style={{ fontSize: "20px", margin: 0, fontFamily: "var(--font-heading)" }}>Platform Settings</h1>
-            <p className="text-small">Admin / Settings</p>
-          </div>
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <div style={{ position: "relative" }}>
-              <LuSearch style={{ position: "absolute", left: "12px", top: "10px", color: "var(--color-text-muted)" }} />
-              <input type="text" className="form-input" placeholder="Search settings..." style={{ paddingLeft: "36px", width: "280px", borderRadius: "20px" }} />
-            </div>
-            <div className="badge-warning" style={{ padding: "8px", borderRadius: "50%" }}><LuBell /></div>
-          </div>
-        </header>
-
         <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: "24px", alignItems: "start" }}>
           
           {/* Settings Sidebar */}

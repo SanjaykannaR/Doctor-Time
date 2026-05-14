@@ -6,9 +6,15 @@ import {
   LuChartNoAxesColumn,
   LuLayoutDashboard,
   LuLogOut,
+  LuBell,
+  LuMenu,
+  LuPlus,
+  LuSearch,
   LuSettings,
   LuStethoscope,
+  LuCircleUser,
   LuUsers,
+  LuX,
 } from "react-icons/lu";
 
 const menuItems = [
@@ -20,18 +26,32 @@ const menuItems = [
   { icon: LuChartNoAxesColumn, label: "Reports", path: "/reports" },
 ];
 
+const pageTitles = {
+  "/": "Dashboard",
+  "/doctors": "Doctors",
+  "/patients": "Patients",
+  "/appointments": "Appointments",
+  "/approvals": "Approvals",
+  "/reports": "Reports",
+  "/settings": "Settings",
+};
+
 const Layout = ({ children, mainStyle }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeItem, setActiveItem] = useState("Dashboard");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pageTitle = pageTitles[location.pathname] || "Dashboard";
 
   const handleItemClick = (item) => {
     setActiveItem(item.label);
     if (item.path) navigate(item.path);
+    setIsSidebarOpen(false);
   };
 
   return (
     <div
+      className="admin-shell"
       style={{
         display: "flex",
         minHeight: "100vh",
@@ -39,7 +59,27 @@ const Layout = ({ children, mainStyle }) => {
         backgroundColor: "var(--color-bg, #f8fafc)",
       }}
     >
+      <button
+        className="admin-menu-button"
+        type="button"
+        aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+        aria-expanded={isSidebarOpen}
+        onClick={() => setIsSidebarOpen((open) => !open)}
+      >
+        {isSidebarOpen ? <LuX size={22} /> : <LuMenu size={22} />}
+      </button>
+
+      {isSidebarOpen && (
+        <button
+          className="admin-sidebar-overlay"
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       <aside
+        className={`admin-sidebar ${isSidebarOpen ? "is-open" : ""}`}
         style={{
           width: "260px",
           backgroundColor: "#1a222c",
@@ -55,12 +95,9 @@ const Layout = ({ children, mainStyle }) => {
         }}
       >
         <div style={{ padding: "24px 24px 10px 24px" }}>
-          <h2 style={{ color: "#fff", margin: 0, fontSize: "22px", fontWeight: "700" }}>
+          <h2 style={{ color: "#fff", margin: 0, fontSize: "26px", fontWeight: "700" }}>
             MediLink
           </h2>
-          <p style={{ fontSize: "10px", color: "#64748b", letterSpacing: "1px", margin: "4px 0 0 0" }}>
-            ADMIN CONSOLE
-          </p>
         </div>
 
         <div style={{ padding: "0 12px", flex: 1 }}>
@@ -95,18 +132,46 @@ const Layout = ({ children, mainStyle }) => {
             icon={LuSettings}
             label="Settings"
             active={location.pathname === "/settings"}
-            onClick={() => navigate("/settings")}
+            onClick={() => {
+              navigate("/settings");
+              setIsSidebarOpen(false);
+            }}
           />
           <SidebarItem icon={LuLogOut} label="Logout" isLogout onClick={() => console.log("Logging out...")} />
         </div>
       </aside>
 
+      <header className="admin-topbar">
+        <div className="admin-topbar-brand">
+          <span className="admin-topbar-logo">
+            <LuPlus size={22} strokeWidth={3} />
+          </span>
+          <span>{pageTitle}</span>
+        </div>
+
+        <div className="admin-topbar-search">
+          <LuSearch size={18} />
+          <input type="search" placeholder="Search..." aria-label="Search" />
+        </div>
+
+        <div className="admin-topbar-actions">
+          <button type="button" className="admin-icon-button" aria-label="Notifications">
+            <LuBell size={20} />
+          </button>
+          <button type="button" className="admin-profile-button" aria-label="Profile">
+            <LuCircleUser size={24} />
+            <span>Profile</span>
+          </button>
+        </div>
+      </header>
+
       <main
+        className="admin-main"
         style={{
           marginLeft: "260px",
           flex: 1,
           minHeight: "100vh",
-          padding: "24px",
+          padding: "96px 24px 24px",
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",

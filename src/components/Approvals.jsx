@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { 
-  LuSearch, 
-  LuBell, 
   LuCheck, 
   LuX, 
   LuInfo,
@@ -59,22 +57,6 @@ export default function Approvals() {
 
   return (
       <div style={{ width: "100%", fontFamily: "var(--font-body)" }}>
-        
-        {/* Header */}
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-6)" }}>
-          <div>
-            <h1 style={{ fontSize: "var(--text-xl)", margin: 0, fontFamily: "var(--font-heading)" }}>Doctor Approvals</h1>
-            <p className="text-small">Admin / Doctor Approvals</p>
-          </div>
-          <div style={{ display: "flex", gap: "var(--space-4)", alignItems: "center" }}>
-            <div style={{ position: "relative" }}>
-              <LuSearch style={{ position: "absolute", left: "12px", top: "10px", color: "var(--color-text-muted)" }} />
-              <input type="text" className="form-input" placeholder="Search doctors, patients..." style={{ paddingLeft: "36px", width: "280px", borderRadius: "var(--radius-full)" }} />
-            </div>
-            <div className="badge-warning" style={{ padding: "10px", borderRadius: "50%" }}><LuBell /></div>
-          </div>
-        </header>
-
         {/* 3. ALERT BANNER */}
         <div style={{ 
           backgroundColor: "var(--color-warning-subtle)", 

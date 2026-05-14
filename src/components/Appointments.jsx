@@ -1,7 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { 
-  LuSearch, 
-  LuBell, 
   LuCalendar, 
   LuCircleCheck, 
   LuClock, 
@@ -13,7 +11,6 @@ import {
 export default function Appointments() {
   // --- 1. STATE FOR DYNAMIC FILTERING ---
   const [activeTab, setActiveTab] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
 
   const appointmentsData = [
     { id: 1, time: "10:30 AM", patient: "Priya Sharma", doctor: "Dr. Ravi Kumar", specialty: "Cardiology", type: "FOLLOW-UP", status: "CONFIRMED" },
@@ -29,44 +26,16 @@ export default function Appointments() {
   // --- 2. DYNAMIC FILTER LOGIC ---
   const filteredData = useMemo(() => {
     return appointmentsData.filter(app => {
-      const matchesSearch = app.patient.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                            app.doctor.toLowerCase().includes(searchTerm.toLowerCase());
-      
       const matchesTab = activeTab === "All" || 
                          (activeTab === "Today" && app.status !== "CANCELLED") ||
                          app.status === activeTab.toUpperCase();
                          
-      return matchesSearch && matchesTab;
+      return matchesTab;
     });
-  }, [searchTerm, activeTab]);
+  }, [activeTab]);
 
   return (
       <div style={{ width: "100%", fontFamily: "var(--font-body)" }}>
-        
-        {/* Header with Search */}
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-6)" }}>
-          <div>
-            <h1 style={{ fontSize: "var(--text-xl)", margin: 0, fontFamily: "var(--font-heading)" }}>Appointments</h1>
-            <p className="text-small">Admin / Appointments Management</p>
-          </div>
-          <div style={{ display: "flex", gap: "var(--space-4)", alignItems: "center" }}>
-            <div style={{ position: "relative" }}>
-              <LuSearch style={{ position: "absolute", left: "12px", top: "10px", color: "var(--color-text-muted)" }} />
-              <input 
-                type="text" 
-                className="form-input" 
-                placeholder="Search patient or doctor..." 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ paddingLeft: "36px", width: "280px", borderRadius: "var(--radius-full)" }} 
-              />
-            </div>
-            <div className="badge-warning" style={{ padding: "10px", borderRadius: "var(--radius-full)", cursor: "pointer" }}>
-              <LuBell />
-            </div>
-          </div>
-        </header>
-
         {/* Dynamic Stats Row */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--space-5)", marginBottom: "var(--space-6)" }}>
           <StatCard count="24" label="TODAY" icon={<LuCalendar color="var(--color-primary)" />} />
@@ -83,7 +52,7 @@ export default function Appointments() {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`btn-sm ${activeTab === tab ? "btn-primary" : "btn-ghost"}`}
-                style={{ borderRadius: "var(--radius-sm)", minWidth: "80px" }}
+                style={{ borderRadius: "var(--radius-sm)", minWidth: "110px" }}
               >
                 {tab}
               </button>
@@ -135,7 +104,7 @@ export default function Appointments() {
 
           {filteredData.length === 0 && (
             <div style={{ padding: "var(--space-10)", textAlign: "center", color: "var(--color-text-muted)" }}>
-              No appointments found for "{searchTerm}" in {activeTab}.
+              No appointments found in {activeTab}.
             </div>
           )}
         </div>
