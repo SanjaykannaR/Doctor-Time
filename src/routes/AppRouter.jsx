@@ -17,6 +17,7 @@ const AppRouter = () => {
     // 2. Remove the <BrowserRouter> wrapping tags here! Just use <Routes>
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/doctor/:id" element={<DoctorProfilePage />} />

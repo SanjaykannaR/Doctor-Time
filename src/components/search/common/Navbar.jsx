@@ -33,6 +33,7 @@ const Navbar = () => {
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
+    closeMenus();
     if (location.pathname !== "/search") {
       // Jump to search page and keep typing
       navigate(`/search?q=${value}`);
@@ -59,6 +60,12 @@ const Navbar = () => {
 
   const hasUnread = notifications.some((n) => !n.read);
 
+  const closeMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsNotifOpen(false);
+    setIsSettingsOpen(false);
+  };
+
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const toggleNotifMenu = () => {
     setIsNotifOpen(!isNotifOpen);
@@ -71,7 +78,12 @@ const Navbar = () => {
 
   const markAllAsRead = () => {
     setNotifications(notifications.map((n) => ({ ...n, read: true })));
-    setIsNotifOpen(false);
+    closeMenus();
+  };
+
+  const handleLogout = () => {
+    closeMenus();
+    navigate("/login");
   };
 
   return (
@@ -83,6 +95,7 @@ const Navbar = () => {
         {/* 1. LOGO */}
         <Link
           to="/home"
+          onClick={closeMenus}
           className="flex items-center gap-2 cursor-pointer group shrink-0"
         >
           <div
@@ -133,7 +146,10 @@ const Navbar = () => {
         <div className="flex items-center gap-3 md:gap-5 shrink-0">
           {/* Mobile Search Icon */}
           <button
-            onClick={() => navigate("/search")}
+            onClick={() => {
+              closeMenus();
+              navigate("/search");
+            }}
             className="md:hidden text-gray-500 p-1"
           >
             <FiSearch size={22} />
@@ -161,6 +177,8 @@ const Navbar = () => {
                 <NotificationDropdown
                   notifications={notifications}
                   markAllAsRead={markAllAsRead}
+                  hasUnread={hasUnread}
+                  onClose={closeMenus}
                 />
               )}
             </div>
@@ -174,7 +192,9 @@ const Navbar = () => {
               >
                 <FiSettings size={22} />
               </button>
-              {isSettingsOpen && <SettingsDropdown />}
+              {isSettingsOpen && (
+                <SettingsDropdown onClose={closeMenus} onLogout={handleLogout} />
+              )}
             </div>
           </div>
 
@@ -214,6 +234,8 @@ const Navbar = () => {
               <NotificationDropdown
                 notifications={notifications}
                 markAllAsRead={markAllAsRead}
+                hasUnread={hasUnread}
+                onClose={closeMenus}
                 isMobile
               />
             </div>
@@ -228,7 +250,11 @@ const Navbar = () => {
           </button>
           {isSettingsOpen && (
             <div className="py-2 px-2">
-              <SettingsDropdown isMobile />
+              <SettingsDropdown
+                isMobile
+                onClose={closeMenus}
+                onLogout={handleLogout}
+              />
             </div>
           )}
         </div>
@@ -239,7 +265,13 @@ const Navbar = () => {
 
 // --- DROPDOWNS (CLEANED PADDING) ---
 
-const NotificationDropdown = ({ notifications, markAllAsRead, isMobile }) => (
+const NotificationDropdown = ({
+  notifications,
+  markAllAsRead,
+  hasUnread,
+  onClose,
+  isMobile,
+}) => (
   <div
     className={`${isMobile ? "w-full" : "absolute top-12 right-0 w-80"} bg-white rounded-3xl shadow-2xl border border-gray-100 z-50 overflow-hidden animate-in fade-in zoom-in-95`}
   >
@@ -254,8 +286,15 @@ const NotificationDropdown = ({ notifications, markAllAsRead, isMobile }) => (
       <h3 className="font-bold text-gray-900">Notifications</h3>
       <button
         onClick={markAllAsRead}
-        className=" btn btn-sm btn-primary text-xs font-bold text-emerald-600 flex items-center"
-        style={{ marginLeft: "var(--space-3)" }}
+        disabled={!hasUnread}
+        className={`btn btn-sm text-xs font-bold flex items-center ${
+          hasUnread ? "btn-primary" : "btn-secondary"
+        }`}
+        style={{
+          marginLeft: "var(--space-3)",
+          opacity: hasUnread ? 1 : 0.5,
+          cursor: hasUnread ? "pointer" : "not-allowed",
+        }}
       >
         <FiCheck style={{ marginRight: "4px" }} /> Mark Read
       </button>
@@ -264,6 +303,7 @@ const NotificationDropdown = ({ notifications, markAllAsRead, isMobile }) => (
       {notifications.map((n) => (
         <div
           key={n.id}
+          onClick={onClose}
           className={`border-b border-gray-50 last:border-0 flex gap-4 ${!n.read ? "bg-emerald-50/20" : ""}`}
           style={{
             padding: "var(--space-4)",
@@ -298,8 +338,7 @@ const NotificationDropdown = ({ notifications, markAllAsRead, isMobile }) => (
   </div>
 );
 
-const SettingsDropdown = ({ isMobile }) => {
-  const navigate = useNavigate();
+const SettingsDropdown = ({ isMobile, onClose, onLogout }) => {
   return (
   <div
     className={`${isMobile ? "w-full" : "absolute top-12 right-0 w-64"} bg-white rounded-3xl shadow-2xl border border-gray-100 z-50 overflow-hidden animate-in fade-in zoom-in-95`}
@@ -322,12 +361,14 @@ const SettingsDropdown = ({ isMobile }) => {
       <button
         className="w-full flex items-center text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-2xl transition-all"
         style={{ padding: "var(--space-4)" }}
+        onClick={onClose}
       >
         <FiUser size={18} style={{ marginRight: "8px" }} /> Profile
       </button>
       <button
         className="w-full flex items-center text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-2xl transition-all"
         style={{ padding: "var(--space-4)" }}
+        onClick={onClose}
       >
         <FiSettings size={18} style={{ marginRight: "8px" }} /> Settings
       </button>
@@ -335,7 +376,7 @@ const SettingsDropdown = ({ isMobile }) => {
         <button
           className="w-full btn btn-sm btn-danger flex items-center text-sm font-bold text-red-500 hover:bg-red-50 rounded-2xl transition-all"
           style={{ padding: "var(--space-3)" }}
-          onClick={() => navigate("/login")}
+          onClick={onLogout}
         >
           <FiLogOut size={18} style={{ marginRight: "8px" }} /> Logout
         </button>

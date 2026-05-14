@@ -6,12 +6,11 @@ import { VscWorkspaceTrusted } from "react-icons/vsc";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 
-const LoginPage = () => {
-  // --- STATE ---
+const useLoginForm = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -36,6 +35,26 @@ const LoginPage = () => {
       setErrorMessage("Invalid email or password");
     }
   };
+
+  return {
+    email,
+    password,
+    errorMessage,
+    setEmail,
+    setPassword,
+    handleLogin,
+  };
+};
+
+const LoginPage = () => {
+  const {
+    email,
+    password,
+    errorMessage,
+    setEmail,
+    setPassword,
+    handleLogin,
+  } = useLoginForm();
 
   return (
     // 1. The main wrapper is now a flex container taking up the full screen.

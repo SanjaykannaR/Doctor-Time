@@ -13,6 +13,7 @@ const BookingPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedDetails, setSelectedDetails] = useState({
     date: null,
+    dateISO: null,
     time: null
   });
 
@@ -67,6 +68,7 @@ const BookingPage = () => {
 
           {currentStep === 3 && (
             <BookingSuccess 
+              data={selectedDetails}
               onViewAppointments={() => navigate('/appointments')}
             />
           )}

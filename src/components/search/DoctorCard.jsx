@@ -20,8 +20,7 @@ const DoctorCard = ({ doctor }) => {
           alt={doctor.name}
         />
         <div
-          className="absolute -bottom-2 -right-2 bg-surface flex items-center gap-1.5"
-          style={{ padding: "var(--space-2)" }}
+          className="absolute -bottom-2 -right-2 flex items-center gap-1.5"
         >
           <StarRating rating={doctor.rating} />
         </div>

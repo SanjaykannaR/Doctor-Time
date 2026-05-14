@@ -1,12 +1,15 @@
 // App.jsx
+import { useLocation } from 'react-router-dom';
 import Navbar from './components/search/common/Navbar';
 import AppRouter from './routes/AppRouter';
 
 function App() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === '/login';
+
   return (
     <div className="App">
-      {/* Navbar stays here so it NEVER unmounts during navigation */}
-      <Navbar /> 
+      {!hideNavbar && <Navbar />}
       <main>
         <AppRouter />
       </main>

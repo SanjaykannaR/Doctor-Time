@@ -4,10 +4,17 @@ import { FiArrowRight, FiCalendar, FiCheck, FiMapPin } from "react-icons/fi";
 import Badge from "../common/Badge";
 
 const BookingSuccess = ({
+  data,
   doctor = "Dr. Arjun Mehta",
   bookingRef = "DT-2025-03914",
+  onViewAppointments,
 }) => {
   const navigate = useNavigate();
+  const appointmentDateTime =
+    data?.date && data?.time
+      ? `${data.date} - ${data.time}`
+      : "Date & time not selected";
+  const amount = data?.fee ?? "Rs. 900";
 
   return (
     <div className="max-w-2xl mx-auto text-center animate-in zoom-in-95 duration-500">
@@ -41,7 +48,7 @@ const BookingSuccess = ({
             </div>
             <div>
               <p className="section-title">Date & Time</p>
-              <p>Tue, Mar 25 - 10:00 AM</p>
+              <p>{appointmentDateTime}</p>
             </div>
           </div>
 
@@ -61,13 +68,13 @@ const BookingSuccess = ({
           style={{ borderTop: "1px solid var(--color-border)" }}
         >
           <span className="text-small">Amount</span>
-          <span>₹900 (Pay at Clinic)</span>
+          <span>{amount} (Pay at Clinic)</span>
         </div>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 px-4">
         <button
-          onClick={() => navigate("/appointments")}
+          onClick={onViewAppointments ?? (() => navigate("/appointments"))}
           className="btn btn-primary btn-full"
         >
           View Appointments
