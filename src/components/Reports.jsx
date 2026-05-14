@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { 
-  LuSearch, LuBell, LuDownload, LuTrendingUp, 
+  LuDownload, LuTrendingUp, 
   LuUsers, LuCalendar, LuStethoscope, LuStar 
 } from "react-icons/lu";
 
@@ -25,14 +25,8 @@ export default function Reports() {
   return (
       <div style={{ width: "100%", fontFamily: "var(--font-body)" }}>
         
-        {/* Header Section */}
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-          <div>
-            <h1 style={{ fontSize: "20px", margin: 0, fontFamily: "var(--font-heading)" }}>Reports & Analytics</h1>
-            <p className="text-small">Admin / Reports</p>
-          </div>
-          
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: "24px" }}>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ display: "flex", background: "var(--color-white)", padding: "4px", borderRadius: "8px", border: "1px solid var(--color-border)" }}>
               {["Today", "7 Days", "30 Days", "90 Days", "Custom"].map(range => (
                 <button 
@@ -46,9 +40,8 @@ export default function Reports() {
               ))}
             </div>
             <button className="btn btn-accent btn-sm"><LuDownload size={14} /> Export</button>
-            <div className="badge-warning" style={{ padding: "10px", borderRadius: "50%" }}><LuBell /></div>
           </div>
-        </header>
+        </div>
 
         {/* 1. Revenue & Stats Row */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px", marginBottom: "24px" }}>

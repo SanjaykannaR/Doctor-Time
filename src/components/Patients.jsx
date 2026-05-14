@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LuSearch, LuBell, LuUsers, LuUserPlus, LuMessageSquare, LuDownload } from "react-icons/lu";
+import { LuUsers, LuUserPlus, LuMessageSquare, LuDownload } from "react-icons/lu";
 
 export default function Patients() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,21 +23,6 @@ export default function Patients() {
 
   return (
       <div style={{ width: "100%", fontFamily: "var(--font-body)" }}>
-        {/* Top Header */}
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-          <div>
-            <h1 style={{ fontSize: "40px", margin: 0 }}>Patients</h1>
-            <p className="text-small">Admin / Patients</p>
-          </div>
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <div style={{ position: "relative" }}>
-              <LuSearch style={{ position: "absolute", left: "12px", top: "10px", color: "var(--color-text-muted)" }} />
-              <input type="text" className="form-input" placeholder="Search doctors, patients..." style={{ paddingLeft: "36px", width: "280px", borderRadius: "20px" }} />
-            </div>
-            <div className="badge-warning" style={{ padding: "8px", borderRadius: "50%", cursor: "pointer" }}><LuBell /></div>
-          </div>
-        </header>
-
         {/* Stats Summary Cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", marginBottom: "24px" }}>
           <SummaryCard count="4,821" label="TOTAL PATIENTS" icon={<LuUsers color="#2D7DD2" />} />
