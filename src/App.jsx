@@ -5,7 +5,10 @@ import AppRouter from './routes/AppRouter';
 
 function App() {
   const location = useLocation();
-  const hideNavbar = location.pathname === '/login';
+  const hideNavbar =
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname.startsWith('/auth/');
 
   return (
     <div className="App">

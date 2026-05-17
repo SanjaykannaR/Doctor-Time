@@ -16,6 +16,7 @@ import {
   FiUser,
   FiLogOut,
   FiSearch,
+  FiRepeat,
 } from "react-icons/fi";
 import Avatar from "./Avatar";
 
@@ -27,6 +28,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   // Sync input with the URL
   const currentQuery = searchParams.get("q") || "";
@@ -64,16 +66,24 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setIsNotifOpen(false);
     setIsSettingsOpen(false);
+    setIsAccountOpen(false);
   };
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const toggleNotifMenu = () => {
     setIsNotifOpen(!isNotifOpen);
     setIsSettingsOpen(false);
+    setIsAccountOpen(false);
   };
   const toggleSettingsMenu = () => {
     setIsSettingsOpen(!isSettingsOpen);
     setIsNotifOpen(false);
+    setIsAccountOpen(false);
+  };
+  const toggleAccountMenu = () => {
+    setIsAccountOpen(!isAccountOpen);
+    setIsNotifOpen(false);
+    setIsSettingsOpen(false);
   };
 
   const markAllAsRead = () => {
@@ -84,6 +94,11 @@ const Navbar = () => {
   const handleLogout = () => {
     closeMenus();
     navigate("/login");
+  };
+
+  const goToPage = (path) => {
+    closeMenus();
+    navigate(path);
   };
 
   return (
@@ -193,17 +208,35 @@ const Navbar = () => {
                 <FiSettings size={22} />
               </button>
               {isSettingsOpen && (
-                <SettingsDropdown onClose={closeMenus} onLogout={handleLogout} />
+                <SettingsDropdown
+                  onNavigate={goToPage}
+                  onLogout={handleLogout}
+                />
               )}
             </div>
           </div>
 
-          <Avatar
-            name="Sanjay Kanna"
-            size="sm"
-            className="cursor-pointer border-2"
-            style={{ borderColor: "var(--color-primary-subtle)" }}
-          />
+          <div className="relative">
+            <button
+              type="button"
+              onClick={toggleAccountMenu}
+              className="flex items-center justify-center"
+              aria-label="Open account menu"
+            >
+              <Avatar
+                name="Sanjay Kanna"
+                size="sm"
+                className="cursor-pointer border-2"
+                style={{ borderColor: "var(--color-primary-subtle)" }}
+              />
+            </button>
+            {isAccountOpen && (
+              <AccountDropdown
+                onClose={closeMenus}
+                onSwitchAccount={() => goToPage("/login")}
+              />
+            )}
+          </div>
 
           <button className="md:hidden p-1" onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -253,6 +286,7 @@ const Navbar = () => {
               <SettingsDropdown
                 isMobile
                 onClose={closeMenus}
+                onNavigate={goToPage}
                 onLogout={handleLogout}
               />
             </div>
@@ -338,7 +372,7 @@ const NotificationDropdown = ({
   </div>
 );
 
-const SettingsDropdown = ({ isMobile, onClose, onLogout }) => {
+const SettingsDropdown = ({ isMobile, onNavigate, onLogout }) => {
   return (
   <div
     className={`${isMobile ? "w-full" : "absolute top-12 right-0 w-64"} bg-white rounded-3xl shadow-2xl border border-gray-100 z-50 overflow-hidden animate-in fade-in zoom-in-95`}
@@ -361,14 +395,14 @@ const SettingsDropdown = ({ isMobile, onClose, onLogout }) => {
       <button
         className="w-full flex items-center text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-2xl transition-all"
         style={{ padding: "var(--space-4)" }}
-        onClick={onClose}
+        onClick={() => onNavigate("/profile")}
       >
         <FiUser size={18} style={{ marginRight: "8px" }} /> Profile
       </button>
       <button
         className="w-full flex items-center text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-2xl transition-all"
         style={{ padding: "var(--space-4)" }}
-        onClick={onClose}
+        onClick={() => onNavigate("/settings")}
       >
         <FiSettings size={18} style={{ marginRight: "8px" }} /> Settings
       </button>
@@ -385,5 +419,40 @@ const SettingsDropdown = ({ isMobile, onClose, onLogout }) => {
   </div>
   );
 };
+
+const AccountDropdown = ({ onClose, onSwitchAccount }) => (
+  <div className="absolute top-12 right-0 w-72 bg-white rounded-3xl shadow-2xl border border-gray-100 z-50 overflow-hidden animate-in fade-in zoom-in-95">
+    <div
+      className="border-b bg-gray-50/50 flex items-center gap-3"
+      style={{ padding: "var(--space-5)" }}
+    >
+      <Avatar name="Sanjay Kanna" size="md" />
+      <div className="flex flex-col min-w-0">
+        <span className="text-sm font-bold text-gray-900 truncate">
+          Sanjay Kanna
+        </span>
+        <span className="text-xs text-gray-400 truncate">
+          sanjay.kanna@example.com
+        </span>
+      </div>
+    </div>
+    <div style={{ padding: "var(--space-2)" }}>
+      <button
+        className="w-full flex items-center text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-2xl transition-all"
+        style={{ padding: "var(--space-4)" }}
+        onClick={onSwitchAccount}
+      >
+        <FiRepeat size={18} style={{ marginRight: "8px" }} /> Switch Account
+      </button>
+      <button
+        className="w-full flex items-center text-sm font-medium text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-2xl transition-all"
+        style={{ padding: "var(--space-4)" }}
+        onClick={onClose}
+      >
+        <FiUser size={18} style={{ marginRight: "8px" }} /> Current Account
+      </button>
+    </div>
+  </div>
+);
 
 export default Navbar;

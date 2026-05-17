@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { IoTimerSharp } from "react-icons/io5";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
@@ -47,6 +47,7 @@ const useLoginForm = () => {
 };
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const {
     email,
     password,
@@ -211,10 +212,16 @@ const LoginPage = () => {
               gap: "var(--space-3)",
             }}
           >
-            <button className="btn btn-secondary btn-full">
+            <button
+              className="btn btn-secondary btn-full"
+              onClick={() => navigate("/auth/google")}
+            >
               <FcGoogle size={20} /> Continue with Google
             </button>
-            <button className="btn btn-secondary btn-full">
+            <button
+              className="btn btn-secondary btn-full"
+              onClick={() => navigate("/auth/apple")}
+            >
               <FaApple size={20} /> Continue with Apple
             </button>
           </div>
@@ -222,12 +229,12 @@ const LoginPage = () => {
           <div style={{ marginTop: "var(--space-6)", textAlign: "center" }}>
             <p className="text-small">
               Need to Create an Account?{" "}
-              <a
-                href="#"
+              <Link
+                to="/signup"
                 style={{ color: "var(--color-primary)", fontWeight: "bold" }}
               >
                 Sign up
-              </a>
+              </Link>
             </p>
           </div>
         </div>
